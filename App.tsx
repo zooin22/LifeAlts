@@ -1,31 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppProvider } from './src/context/AppContext';
+import HomeScreen from './src/screens/HomeScreen';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>삶의 부캐</Text>
-      <Text style={styles.sub}>LIFE Alts</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppProvider>
+      <StatusBar style="light" />
+      <HomeScreen />
+    </AppProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1a1a2e',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#F0C070',
-  },
-  sub: {
-    fontSize: 16,
-    color: '#aaa',
-    marginTop: 8,
-  },
-});

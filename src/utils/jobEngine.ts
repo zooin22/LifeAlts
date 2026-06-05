@@ -5,6 +5,39 @@ const WINDOW_DAYS = 14;
 const DECAY_RATE = 0.9;        // per day
 const COMBO_THRESHOLD = 0.7;   // 2nd stat must be >= 70% of 1st
 const GOLD_DOMINANCE = 0.4;    // gold fraction to trigger merchant class
+const SLUMBER_DAYS = 3;        // days without activity before a stat is "sleeping"
+
+const SLUMBER_LABELS: Partial<Record<StatKey | 'gold', string>> = {
+  str:    '체력 기운',
+  int:    '지식 기운',
+  cha:    '교류 기운',
+  dex:    '창작 기운',
+  wis:    '내면 기운',
+  health: '건강 기운',
+  gold:   '수익 기운',
+};
+
+/** Returns a gentle observation message when the primary stat hasn't been exercised recently. */
+export function getSlumberMessage(
+  actions: Action[],
+  primaryStat: StatKey | 'gold' | null,
+): string | null {
+  if (!primaryStat) return null;
+
+  const now = Date.now();
+  const slumberCutoff = now - SLUMBER_DAYS * 24 * 60 * 60 * 1000;
+  const windowCutoff  = now - WINDOW_DAYS  * 24 * 60 * 60 * 1000;
+
+  const statActions = actions.filter(a => a.stat === primaryStat);
+  const hasHistory = statActions.some(a => new Date(a.ts).getTime() >= windowCutoff);
+  const hasRecent  = statActions.some(a => new Date(a.ts).getTime() >= slumberCutoff);
+
+  if (hasHistory && !hasRecent) {
+    const label = SLUMBER_LABELS[primaryStat] ?? '기운';
+    return `요즘 ${label}이 잠들었어요`;
+  }
+  return null;
+}
 
 /** Returns weighted stat totals from recent actions (rolling window + decay). */
 export function computeStats(actions: Action[]): { stats: Stats; gold: number } {

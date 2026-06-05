@@ -1,3 +1,7 @@
+/**
+ * 추천 루틴 씨앗 — 길드 '루틴 추가' 탭에 뜨는 기본 목록.
+ * 각 항목에 stat(흘러들 스탯)과 amount(무게: 물1잔=작게, 운동=크게)가 미리 박혀 있다.
+ */
 import { ActionType, Routine, StatKey } from '../types';
 import { uuid } from '../utils/uuid';
 

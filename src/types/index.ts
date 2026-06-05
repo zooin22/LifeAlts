@@ -1,3 +1,8 @@
+// ============================================================================
+// 앱 전역 타입 정의 (단일 소스). 다른 파일은 여기서 import 한다.
+// 스키마는 2단계(도감·친구·동기화) 확장을 대비해 여유 있게 설계됨.
+// ============================================================================
+
 // ─── Stats ───────────────────────────────────────────────────────────────────
 
 export type StatKey = 'str' | 'int' | 'cha' | 'dex' | 'wis' | 'health';
@@ -62,6 +67,24 @@ export interface Quest {
   abandoned: boolean;
   period: string;       // daily: 'YYYY-MM-DD' / main: 'YYYY'
   createdAt: string;
+}
+
+// ─── Job History (직업 변천사) ─────────────────────────────────────────────────
+
+export interface JobChangeEvent {
+  id: string;
+  ts: string;          // ISO datetime — 전환 시각
+  from: JobId;
+  to: JobId;
+}
+
+// ─── Inventory (상점 / 소지품) ──────────────────────────────────────────────────
+
+export interface Inventory {
+  spentGold: number;            // 누적 사용 금화 (소지금 = 평생 번 금화 − spentGold)
+  streakFreezes: number;        // 보유한 스트릭 복구권 개수
+  ownedTitles: string[];        // 구매한 칭호 id 목록
+  equippedTitle: string | null; // 착용 중인 칭호 id
 }
 
 // ─── Character ────────────────────────────────────────────────────────────────

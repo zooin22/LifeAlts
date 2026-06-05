@@ -1,3 +1,8 @@
+/**
+ * 직업 정의 — 16종 (단일 8 + 조합 7 + 숨은 1).
+ * 판정 로직은 utils/jobEngine.ts. 여기엔 표시용 이름/설명/대표 스탯만.
+ * 새 직업 추가 시 types의 JobId, jobEngine 매핑, SvgCharacter 팔레트, voices도 함께 갱신.
+ */
 import { JobDef } from '../types';
 
 export const JOBS: JobDef[] = [

@@ -8,17 +8,20 @@ import { JobId } from '../../types';
  * Rive 에디터 내부 로직이 알아서 처리한다.
  *
  * ── Rive 전환 체크리스트 ───────────────────────────────────────────────
- *  1. `npx expo install rive-react-native` (네이티브 모듈 → dev build 필요, Expo Go 불가)
- *  2. `npx expo prebuild` 후 개발 빌드 생성
- *  3. Rive 에디터에서 `character.riv` 제작:
+ *  ✅ 1. `rive-react-native` 설치 완료 (v9.8.3)
+ *
+ *  남은 단계:
+ *  2. Rive 에디터에서 `character.riv` 제작:
  *       - 베이스 캐릭터 + 직업별 의상 레이어 (페이퍼돌)
- *       - 상태 머신 이름: STATE_MACHINE
- *       - Number input `job_id` (아래 JOB_ID_MAP 값과 일치)
- *       - Trigger input `is_success` (퀘스트 완수 시 성장 연출)
+ *       - 상태 머신 이름: STATE_MACHINE (= 'State Machine 1')
+ *       - Number input  `job_id`    (아래 JOB_ID_MAP 숫자값과 일치)
+ *       - Number input  `mood`      (0 idle / 1 happy / 2 sleepy / 3 celebrate)
+ *       - Trigger input `is_success` (퀘스트 완수 성장 연출)
  *       - 기본 idle(숨쉬기) 애니메이션
- *  4. 에셋을 `assets/character.riv` 에 배치
+ *  3. 완성된 파일을 `assets/character.riv` 에 배치
+ *  4. `npx expo prebuild` 후 개발 빌드 생성 (네이티브 모듈 링크)
  *  5. 이 파일의 `RIVE_ENABLED = true` 로 변경
- *  → Character.tsx 파사드가 자동으로 RiveCharacter 를 렌더한다.
+ *  → Character.tsx 파사드가 자동으로 RiveCharacter 를 렌더한다. 소비자 코드 변경 없음.
  */
 
 /** .riv 에셋 + 네이티브 모듈이 준비되면 true 로. 현재는 SVG 폴백. */

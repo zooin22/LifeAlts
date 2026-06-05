@@ -1,9 +1,6 @@
-// @ts-nocheck — 휴면(dormant) 통합 파일.
-// `rive-react-native` 가 아직 설치되지 않았으므로 타입 체크를 끈다.
-// 이 파일은 Character.tsx 파사드가 (RIVE_ENABLED=true 일 때) import 하기 전까지
-// 번들 그래프에 포함되지 않는다 → Expo Go 빌드가 깨지지 않는다.
-//
-// 활성화 순서는 riveConfig.ts 상단 체크리스트 참고.
+// Character.tsx 파사드가 RIVE_ENABLED=true 일 때만 dynamic require 로 로드된다.
+// → Metro 번들에 포함되지 않으므로 Expo Go 안전. dev build 전용.
+// 활성화 순서: riveConfig.ts 체크리스트 참고.
 import React, { useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import Rive, { RiveRef, Fit, Alignment } from 'rive-react-native';

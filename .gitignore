@@ -39,3 +39,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Claude 스킬 임시 스크린샷
+.s.png
+.s-small.png
+.emu-screen.png
